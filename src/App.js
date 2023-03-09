@@ -1,19 +1,12 @@
 import './App.css';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { DogList } from './components/DogList';
-import { ListItem } from './components/ListItem';
-
+import { Navigate } from './route/Navigate';
+import { DataProvider } from './context/DataContext';
 
 function App() {
   return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<DogList />} />
-          <Route path="/:name" element={<ListItem />} />
-        </Routes>
-      </BrowserRouter>
-    </>
+    <DataProvider>
+      <Navigate />
+    </DataProvider>
   );
 }
 

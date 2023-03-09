@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
-import { useFetch } from "../helpers/useFetch";
+import { useContext } from "react";
+import { DataContext } from "../context/DataContext";
 import { Container, Grid, Card } from '@mui/material';
 
 export const DogList = () => {
 
-  const {data, loading} = useFetch("https://api.thedogapi.com/v1/breeds");
+  const {data, loading} = useContext(DataContext);
 
   return (
     <Container>

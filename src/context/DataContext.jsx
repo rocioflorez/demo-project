@@ -5,7 +5,7 @@ export const DataContext = createContext();
 
 export const DataProvider = ({ children }) => {
     
-    const { data, loading } = useFetch();
+    const { data, loading } = useFetch('https://api.thedogapi.com/v1/breeds');
 
     return (
         <DataContext.Provider
