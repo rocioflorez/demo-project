@@ -1,36 +1,31 @@
-import { Link } from "react-router-dom";
-import { useFetch } from "../helpers/useFetch";
-import { Container, Grid, Card } from '@mui/material';
+
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getDogs } from "../store/slices/thunks";
 
 export const DogList = () => {
 
-  const {data, loading} = useFetch("https://api.thedogapi.com/v1/breeds");
+  const dispatch = useDispatch();
+  const { isLoading, dogs } = useSelector( state => state.dogs );
+
+  useEffect(() => {
+    dispatch( getDogs() );
+  }, [dispatch])
+
+  console.log(dogs)
+  
 
   return (
-    <Container>
-        <Grid 
-            container 
-            spacing={8}
-            justifyContent="center"
-            alignItems="center"
-        >
-            {loading && <p>Loading...</p>}
-            {data?.map((data) => (
-                <Grid item >
-                    <Card sx={{ p: 1,  textAlign: 'center' }} >
-                        <Link 
-                            to={`/${data.name}`} 
-                            key={data.id} 
-                        >
-                            <div>
-                                <img src={data.image.url} alt={data.name} />
-                                <h3>{data.name}</h3>
-                            </div>
-                        </Link>
-                    </Card>
-                </Grid>
-            ))}
-        </Grid>
-    </Container>
+    <>
+        <span>Loading: { isLoading ? 'True': 'False' }</span>
+
+        <ul>
+            {
+                dogs.map( (dog) => (
+                <li key={ dog.id }>{ dog.name }</li>
+                ))
+            }
+        </ul>
+    </>
   )
 }

@@ -1,12 +1,10 @@
-import { Link, useParams } from 'react-router-dom';
-import { useFetch } from "../helpers/useFetch";
+/*
+import { Link } from 'react-router-dom';
 import { Container, Card, Button } from '@mui/material';
 
 export const ListItem = () => {
 
-  const {name} = useParams()
-  const {data, loading} = useFetch(`https://api.thedogapi.com/v1/breeds/search?q=${name}`);
-
+ 
   return (
     <Container>
       {loading && <p>Loading...</p>}
@@ -32,3 +30,4 @@ export const ListItem = () => {
     </Container>
   )
 }
+*/
