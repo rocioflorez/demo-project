@@ -13,7 +13,6 @@ export const DogList = () => {
   }, [dispatch])
 
   console.log(dogs)
-  
 
   return (
     <>
@@ -21,8 +20,8 @@ export const DogList = () => {
 
         <ul>
             {
-                dogs.map( (dog) => (
-                <li key={ dog.id }>{ dog.name }</li>
+                dogs.map(({name}) => (
+                <li key={ name }>{ name }</li>
                 ))
             }
         </ul>
