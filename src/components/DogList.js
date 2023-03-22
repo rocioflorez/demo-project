@@ -1,12 +1,11 @@
-
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getDogs } from "../store/slices/thunks";
+import { getDogs } from "../api/index";
 
 export const DogList = () => {
 
-  const dispatch = useDispatch();
   const { isLoading, dogs } = useSelector( state => state.dogs );
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch( getDogs() );
@@ -20,8 +19,8 @@ export const DogList = () => {
 
         <ul>
             {
-                dogs.map(({name}) => (
-                <li key={ name }>{ name }</li>
+                dogs.map(dog => (
+                <li key={ dog.id }>{ dog.name }</li>
                 ))
             }
         </ul>
