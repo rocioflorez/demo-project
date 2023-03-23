@@ -17,6 +17,7 @@ export const DogList = () => {
 
   const handleSelectDog = (dog) => {
     setSelectedDog(dog);
+    console.log(dog)
   };
 
   return (
