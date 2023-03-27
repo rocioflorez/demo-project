@@ -5,36 +5,39 @@ import { Link, useParams } from 'react-router-dom';
 import { Container, Card, Button } from '@mui/material';
 
 export const ListItem = () => {
+  const dispatch = useDispatch();
+  const { name } = useParams();
 
-    const { isLoading, dogs } = useSelector( state => state.dogs );
-    const dispatch = useDispatch();
-    const { name } = useParams();
+  const { isLoading, dogs } = useSelector((state) => state.dogs);
 
-    useEffect(() => {
-      dispatch( getDogs() );
-    }, [dispatch])
- 
+  useEffect(() => {
+    dispatch(getDogs());
+  }, [dispatch]);
+
+  const selectedDog = dogs.find((dog) => dog.name === name);
+
   return (
     <Container>
       {isLoading && <p>Loading...</p>}
-      {dogs.filter(dog => dog.id === parseInt(name)).map((dog) => (
-        <Card 
-          key={dog.id}
-          sx={{ p: 4}}
-        >
-          <img src={`https://cdn2.thedogapi.com/images/${dog.reference_image_id}.jpg`} alt="" />
-          <h1>{dog.name}</h1>
-          {dog.description && <p>{dog.description}</p>}
+      {selectedDog && (
+        <Card sx={{ p: 4 }}>
+          <img
+            src={`https://cdn2.thedogapi.com/images/${selectedDog.reference_image_id}.jpg`}
+            alt=""
+          />
+          <h1>{selectedDog.name}</h1>
+          {selectedDog.description && <p>{selectedDog.description}</p>}
           <ul>
-            <li>Height: {dog.height.metric} cm</li>
-            <li>Weight: {dog.weight.metric} kgs</li>
-            <li>Temperament: {dog.temperament}</li>
+            <li>Height: {selectedDog.height.metric} cm</li>
+            <li>Weight: {selectedDog.weight.metric} kgs</li>
+            <li>Temperament: {selectedDog.temperament}</li>
           </ul>
           <Link to="/">
             <Button>BACK</Button>
           </Link>
-        </Card>  
-      ))}
+        </Card>
+      )}
     </Container>
-  )
-}
+  );
+};
+
